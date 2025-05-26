@@ -1,0 +1,33 @@
+<div class="row">
+  <div class="col-md-8 mx-auto">
+    <div class="card">
+      <% if @player.photo.attached? %>
+        <%= image_tag @player.photo, class: "card-img-top", style: "height: 300px; object-fit: cover;" %>
+      <% else %>
+        <div class="card-img-top bg-light d-flex align-items-center justify-content-center" style="height: 300px;">
+          <span class="text-muted">No Photo</span>
+        </div>
+      <% end %>
+      <div class="card-body">
+        <h1 class="card-title"><%= @player.name %></h1>
+        <p class="card-text">
+          <strong>Age:</strong> <%= @player.display_age %>
+        </p>
+        <p class="card-text">
+          <strong>Birthdate:</strong> <%= @player.birthdate&.strftime("%B %d, %Y") || "Not specified" %>
+        </p>
+        <p class="card-text">
+          <small class="text-muted">
+            Created: <%= @player.created_at.strftime("%B %d, %Y") %>
+          </small>
+        </p>
+        <div class="d-flex justify-content-between">
+          <%= link_to "Edit Player", edit_player_path(@player), class: "btn btn-primary" %>
+          <%= link_to "All Players", players_path, class: "btn btn-outline-secondary" %>
+          <%= link_to "Delete Player", @player, data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to delete #{@player.name}?" }, 
+                      class: "btn btn-outline-danger" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

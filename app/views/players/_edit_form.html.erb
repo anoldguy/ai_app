@@ -1,0 +1,40 @@
+<%= turbo_frame_tag "player_#{player.id}" do %>
+  <div class="card">
+    <%= form_with model: player, local: true, html: { multipart: true, class: "h-100" } do |form| %>
+      <div class="card-img-top bg-light d-flex align-items-center justify-content-center" style="height: 200px;">
+        <div class="text-center">
+          <%= form.file_field :photo, class: "form-control form-control-sm mb-2", accept: "image/*" %>
+          <% if player.photo.attached? %>
+            <small class="text-muted">Current photo will be replaced</small>
+          <% else %>
+            <small class="text-muted">Upload a photo</small>
+          <% end %>
+        </div>
+      </div>
+      <div class="card-body">
+        <% if player.errors.any? %>
+          <div class="alert alert-danger alert-sm">
+            <% player.errors.full_messages.each do |message| %>
+              <small><%= message %></small><br>
+            <% end %>
+          </div>
+        <% end %>
+
+        <div class="mb-3">
+          <%= form.text_field :name, class: "form-control", placeholder: "Player name" %>
+        </div>
+
+        <div class="mb-3">
+          <%= form.date_field :birthdate, class: "form-control" %>
+        </div>
+
+        <div class="d-flex justify-content-between">
+          <%= form.submit "Save", class: "btn btn-primary btn-sm" %>
+          <%= link_to "Cancel", player_path(player), 
+              data: { turbo_method: :get, turbo_stream: true }, 
+              class: "btn btn-outline-secondary btn-sm" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% end %>

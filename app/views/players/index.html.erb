@@ -1,0 +1,27 @@
+<h1>Players</h1>
+
+<div class="row" id="players-grid">
+  <div class="col-md-4 mb-4">
+    <%= turbo_frame_tag "new_player" do %>
+      <div class="card border-dashed">
+        <div class="card-body text-center d-flex align-items-center justify-content-center" style="min-height: 300px;">
+          <%= link_to "Add New Player", new_player_path,
+              data: { turbo_method: :get, turbo_stream: true },
+              class: "btn btn-primary btn-lg" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  
+  <% @players.each do |player| %>
+    <div class="col-md-4 mb-4">
+      <%= render 'player_card', player: player %>
+    </div>
+  <% end %>
+</div>
+
+<% if @players.empty? %>
+  <div class="text-center mt-4">
+    <p class="text-muted">No players found. Click "Add New Player" above to create the first player.</p>
+  </div>
+<% end %>

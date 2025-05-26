@@ -1,0 +1,9 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: John Doe
+  birthdate: <%= 25.years.ago.to_date %>
+
+two:
+  name: Jane Smith
+  birthdate: <%= 30.years.ago.to_date %>

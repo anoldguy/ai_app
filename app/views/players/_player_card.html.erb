@@ -1,0 +1,23 @@
+<%= turbo_frame_tag "player_#{player.id}" do %>
+  <div class="card">
+    <% if player.photo.attached? %>
+      <%= image_tag player.photo, class: "card-img-top", style: "height: 200px; object-fit: cover;" %>
+    <% else %>
+      <div class="card-img-top bg-light d-flex align-items-center justify-content-center" style="height: 200px;">
+        <span class="text-muted">No Photo</span>
+      </div>
+    <% end %>
+    <div class="card-body">
+      <h5 class="card-title"><%= player.name %></h5>
+      <p class="card-text">Age: <%= player.display_age %></p>
+      <div class="d-flex justify-content-between">
+        <%= link_to "View", player, class: "btn btn-outline-primary btn-sm" %>
+        <%= link_to "Edit", edit_player_path(player), 
+            data: { turbo_method: :get, turbo_stream: true }, 
+            class: "btn btn-outline-secondary btn-sm" %>
+        <%= link_to "Delete", player, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, 
+                    class: "btn btn-outline-danger btn-sm" %>
+      </div>
+    </div>
+  </div>
+<% end %>

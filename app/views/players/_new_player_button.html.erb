@@ -1,0 +1,9 @@
+<%= turbo_frame_tag "new_player" do %>
+  <div class="card border-dashed">
+    <div class="card-body text-center d-flex align-items-center justify-content-center" style="min-height: 300px;">
+      <%= link_to "Add New Player", new_player_path,
+          data: { turbo_method: :get, turbo_stream: true },
+          class: "btn btn-primary btn-lg" %>
+    </div>
+  </div>
+<% end %>
